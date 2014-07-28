@@ -1,14 +1,14 @@
 # term-counter
 
-A Clojure library designed to ... well, that part is up to you.
+Run:
 
-## Usage
+    lein ring server
 
-FIXME
+Send query string with terms...
 
-## License
+    curl -XPOST http://localhost:3000/'?q=foo+bar+baz'
 
-Copyright © 2014 FIXME
+Retrieve term counts.
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+    curl http://localhost:3000/
+
