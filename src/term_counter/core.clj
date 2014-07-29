@@ -1,4 +1,5 @@
 (ns term-counter.core
+  (:require [clojure.data.json :as json])
   (:use ring.middleware.params
         ring.util.response))
 
@@ -10,14 +11,13 @@
 
 (defn addcount [q]
   (let [terms (clojure.string/split q #"\s+")]
-    (println (str (mapv add_count_term terms)))
-    (response "OK")))
+    (response (json/write-str (mapv add_count_term terms)))))
 
 (defn handler [request]
   (case (:request-method request)
     :post
     (addcount ((request :query-params) "q"))
     :get
-    (response (str @mem))))
+    (response (json/write-str @mem))))
 
 (def app (wrap-params handler))
